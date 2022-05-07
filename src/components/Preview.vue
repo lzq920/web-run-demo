@@ -1,17 +1,17 @@
 <script setup lang="ts">
-import { defineProps } from 'vue';
+import { defineProps } from "vue";
 interface Props {
-    code: any;
+	code: any;
 }
 const props = withDefaults(defineProps<Props>(), {
-    code: {
-        js: '',
-        css: '',
-        html: '',
-    },
+	code: {
+		js: "",
+		css: "",
+		html: "",
+	},
 });
 const renderDoc = (code: any) => {
-    return `
+	return `
     <html lang="en">
     <head>
         <meta charset="UTF-8">
@@ -24,18 +24,21 @@ const renderDoc = (code: any) => {
     </head>
     <body>
         ${code.html}
-        <script>
+        <script type="importmap">
+        ${code.importMap}
+        <\/script>
+        <script type="module">
         ${code.js}
         <\/script>
     <\/body>
     <\/html>
-    `
-}
+    `;
+};
 </script>
 <template>
-    <div class="preview">
-        <iframe :srcdoc="renderDoc(code)"></iframe>
-    </div>
+	<div class="preview">
+		<iframe :srcdoc="renderDoc(code)"></iframe>
+	</div>
 </template>
 <style scoped>
 .preview {

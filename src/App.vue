@@ -1,34 +1,41 @@
 <script setup lang="ts">
-import Editor from './components/Editor.vue';
-import Preview from './components/Preview.vue';
-import { computed, ref } from 'vue';
-const jsCode = ref('// javascript code');
-const cssCode = ref('/* css code */');
-const htmlCode = ref('<!-- html code -->');
+import Editor from "./components/Editor.vue";
+import Preview from "./components/Preview.vue";
+import { computed, ref } from "vue";
+const jsCode = ref("// javascript code");
+const cssCode = ref("/* css code */");
+const htmlCode = ref("<!-- html code -->");
+const importMapCode = ref(
+	"// importmap code example:https://www.jsdelivr.com/?query=*%20type%3A%20esm"
+);
 const docCode = computed(() => {
-  return {
-    js: jsCode.value,
-    css: cssCode.value,
-    html: htmlCode.value,
-  }
-})
+	return {
+		js: jsCode.value,
+		css: cssCode.value,
+		html: htmlCode.value,
+		importMap: importMapCode.value,
+	};
+});
 </script>
 
 <template>
-  <div class="grid">
-    <div class="grid-item">
-      <Editor v-model="jsCode" :readonly="false" language="javascript" />
-    </div>
-    <div class="grid-item">
-      <Editor v-model="cssCode" :readonly="false" language="css" />
-    </div>
-    <div class="grid-item">
-      <Editor v-model="htmlCode" :readonly="false" language="html" />
-    </div>
-    <div class="grid-item">
-      <Preview :code="docCode" />
-    </div>
-  </div>
+	<div class="grid">
+		<div class="grid-item">
+			<Editor v-model="jsCode" :readonly="false" language="javascript" />
+		</div>
+		<div class="grid-item">
+			<Editor v-model="cssCode" :readonly="false" language="css" />
+		</div>
+		<div class="grid-item">
+			<Editor v-model="htmlCode" :readonly="false" language="html" />
+		</div>
+		<div class="grid-item">
+			<Editor v-model="importMapCode" :readonly="false" language="json" />
+		</div>
+		<div class="grid-item">
+			<Preview :code="docCode" />
+		</div>
+	</div>
 </template>
 
 <style>
